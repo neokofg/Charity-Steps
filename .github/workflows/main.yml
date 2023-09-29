@@ -1,9 +1,9 @@
 on:
   pull_request:
     branches:
-      - main
+    - main
     paths:
-      - backend/**/*
+    - backend/**/*
 jobs:
   tests:
     env:
@@ -29,13 +29,13 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@2.21.2
-        with:
-          php-version: 8.2
-      - run: cp backend/.env.example backend/.env
-      - run: composer config http-basic.nova.laravel.com info@booky.co 9ioOtMJmdiou0SD2td8HcGw5Q4Ejh55KjuDkhL2QNY6RkSQ0ek
-      - run: composer install -n --prefer-dist
-      - run: php artisan key:generate
-      - run: php artisan test
+    - uses: actions/checkout@v3
+    - name: Setup PHP Action
+      uses: shivammathur/setup-php@2.21.2
+      with:
+        php-version: 8.2
+    - run: cp backend/.env.example backend/.env
+    - run: composer config http-basic.nova.laravel.com info@booky.co 9ioOtMJmdiou0SD2td8HcGw5Q4Ejh55KjuDkhL2QNY6RkSQ0ek
+    - run: composer install -n --prefer-dist
+    - run: php artisan key:generate
+    - run: php artisan test

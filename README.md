@@ -38,3 +38,4 @@ Charity Steps - это корпоративное приложение, где �
 - VPS (Ubuntu 22)
 - reg.ru (domain)
 - Certbot (wildcard ssl)
+- Github Actions

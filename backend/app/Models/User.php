@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -19,9 +18,12 @@ class User extends Authenticatable
     //  The attributes that are mass assignable.
     protected $fillable = [
         'name',
+        'surname',
+        'sex',
         'email',
         'password',
         'stepcoins_value',
+        'is_email_verified',
     ];
 
     // The attributes that should be hidden for serialization.
@@ -31,7 +33,6 @@ class User extends Authenticatable
 
     // The attributes that should be cast.
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
     // returns Avatar model, that have url for image
@@ -68,5 +69,10 @@ class User extends Authenticatable
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class,'team_users');
+    }
+
+    public function email_verify(): HasOne
+    {
+        return $this->hasOne(UsersVerify::class, "user_id", 'id');
     }
 }

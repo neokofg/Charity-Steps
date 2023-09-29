@@ -75,10 +75,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'require',
-            'options' => [
-                "endpoint" => "ep-yellow-bar-47524239"
-            ]
+            'sslmode' => 'prefer',
         ],
 
         'sqlsrv' => [

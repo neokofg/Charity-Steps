@@ -75,10 +75,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'require',
-            'options' => [
-                "endpoint" => env('DB_ENDPOINT', null)
-            ],
+            'sslmode' => 'verify-ca',
         ],
 
         'sqlsrv' => [

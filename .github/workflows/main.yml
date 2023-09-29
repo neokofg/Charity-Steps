@@ -1,0 +1,41 @@
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - backend/**/*
+jobs:
+  tests:
+    env:
+      DB_PASSWORD: postgres
+    runs-on: ubuntu-20.04
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgis/postgis:latest
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: booky
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.21.2
+        with:
+          php-version: 8.2
+      - run: cp backend/.env.example backend/.env
+      - run: composer config http-basic.nova.laravel.com info@booky.co 9ioOtMJmdiou0SD2td8HcGw5Q4Ejh55KjuDkhL2QNY6RkSQ0ek
+      - run: composer install -n --prefer-dist
+      - run: php artisan key:generate
+      - run: php artisan test

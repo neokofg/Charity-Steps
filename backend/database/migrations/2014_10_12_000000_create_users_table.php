@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->enum('sex',['M','F'])->nullable();
             $table->integer('stepcoins_value')->default(0);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->boolean('is_email_verified')->default('false');
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

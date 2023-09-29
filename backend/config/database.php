@@ -75,11 +75,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'verify-ca',
-            'options' => [
-                'sslcert' => '/Charity-Steps/cert/crt.txt',
-                'sslkey' => '/Charity-Steps/cert/key.txt',
-            ]
+            'sslmode' => 'prefer',
         ],
 
         'sqlsrv' => [

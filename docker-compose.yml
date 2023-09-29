@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/php/php.ini:/usr/local/etc/php/php.ini
+      - .:/workspace/server
+    restart: on-failure:5
+  nginx:
+    depends_on:
+      -  php
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - .:/workspace
+    restart: on-failure:5

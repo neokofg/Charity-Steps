@@ -21,7 +21,7 @@ Charity Steps - это корпоративное приложение, где �
 
 # Stack
 
-### Backend
+## Backend
 
 - Laravel
 - Laravel Nova
@@ -29,3 +29,12 @@ Charity Steps - это корпоративное приложение, где �
 - REST API + GRAPHQL
 - PUSHER
 - SERVERLESS NEONDB
+
+## DevOps
+
+- Nginx
+- CloudFlare
+- Docker
+- VPS (Ubuntu 22)
+- reg.ru (domain)
+- Certbot (wildcard ssl)

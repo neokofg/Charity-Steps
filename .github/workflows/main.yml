@@ -34,9 +34,8 @@ jobs:
         uses: shivammathur/setup-php@2.21.2
         with:
           php-version: 8.2
-      - run: cd backend
-      - run: cp .env.example .env
-      - run: composer config http-basic.nova.laravel.com info@booky.co 9ioOtMJmdiou0SD2td8HcGw5Q4Ejh55KjuDkhL2QNY6RkSQ0ek
-      - run: composer install -n --prefer-dist
-      - run: php artisan key:generate
-      - run: php artisan test
+      - run: cd backend | cp .env.example .env
+      - run: cd backend | composer config http-basic.nova.laravel.com info@booky.co 9ioOtMJmdiou0SD2td8HcGw5Q4Ejh55KjuDkhL2QNY6RkSQ0ek
+      - run: cd backend | composer install -n --prefer-dist
+      - run: cd backend | php artisan key:generate
+      - run: cd backend | php artisan test

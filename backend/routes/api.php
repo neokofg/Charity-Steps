@@ -31,3 +31,4 @@ Route::prefix("user")->middleware('auth:sanctum')->group(function () {
     Route::post('/update/email', [UserController::class, "update_email"]);
     Route::post('/update/email/approve', [UserController::class, "update_email_approve"]);
 });
+

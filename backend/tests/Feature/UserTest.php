@@ -28,7 +28,9 @@ class UserTest extends TestCase
         $response = $this->json('GET', '/api/user/get', [],['Authorization' => 'Bearer '. $token]);
         $response->assertStatus(200);
         $response->assertJson([
-            "name" => "testUser"
+            "user" => [
+                "name" => "testUser"
+            ]
         ]);
     }
 }

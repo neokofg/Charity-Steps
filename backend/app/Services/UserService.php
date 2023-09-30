@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Avatar;
 use App\Models\User;
 use App\Models\UsersVerify;
 use App\Models\UsersVerifyUpdateEmail;
@@ -9,10 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Throwable;
 
 class UserService {
 
+    public function __construct(private StorageService $storageService)
+    {
+        $this->relations = [
+            "avatar",
+            "histories",
+            "charities",
+            "companies",
+            "admin",
+            "teams"
+        ];
+    }
     private function generateCode(): Int
     {
         $is_unique = false;
@@ -23,6 +37,15 @@ class UserService {
             }
         }
         return $code;
+    }
+
+    public function get_user($u): mixed
+    {
+        try {
+            return $u->with($this->relations)->get();
+        } catch (Throwable $e) {
+            return false;
+        }
     }
     public function register($r): Bool
     {
@@ -166,6 +189,26 @@ class UserService {
             return true;
         } catch (Throwable $e) {
             return false;
+        }
+    }
+
+    public function update_avatar($r, $u): Bool
+    {
+        try {
+            $us = $this->storageService->upload_file($r);
+            $a = Avatar::firstOrCreate([
+                "user_id" => $u->id,
+            ]);
+            $a->url = $us['url'];
+            $a->url_128 = $us['url_128'] ?? null;
+            $a->url_256 = $us['url_256'] ?? null;
+            $a->url_512 = $us['url_512'] ?? null;
+            $a->url_1024 = $us['url_1024'] ?? null;
+            $a->save();
+
+            return true;
+        } catch (Throwable $e) {
+            dd($e);
         }
     }
 }

@@ -24,6 +24,10 @@ class Avatar extends Model
         "user_id"
     ];
 
+    protected $hidden = [
+        'user_id',
+    ];
+
     // returns user
     public function user(): BelongsTo
     {

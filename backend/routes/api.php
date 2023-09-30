@@ -43,5 +43,3 @@ Route::prefix("news")->group(function () {
     Route::get("/find", [NewsController::class, "find_news"]);
 });
 
-Route::get("/callback", [PaymentController::class, "callback"]);
-

@@ -25,7 +25,7 @@ class UserTest extends TestCase
     public function test_getToken()
     {
         $token = $this->user->createToken('')->plainTextToken;
-        $response = $this->json('GET', '/api/user', [],['Authorization' => 'Bearer '. $token]);
+        $response = $this->json('GET', '/api/user/get', [],['Authorization' => 'Bearer '. $token]);
         $response->assertStatus(200);
         $response->assertJson([
             "name" => "testUser"

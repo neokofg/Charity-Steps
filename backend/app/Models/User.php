@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'stepcoins_value',
         'is_email_verified',
+        'description'
     ];
 
     // The attributes that should be hidden for serialization.
@@ -69,10 +70,5 @@ class User extends Authenticatable
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class,'team_users');
-    }
-
-    public function email_verify(): HasOne
-    {
-        return $this->hasOne(UsersVerify::class, "user_id", 'id');
     }
 }

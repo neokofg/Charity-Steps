@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Company\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,9 @@ Route::prefix("user")->middleware('auth:sanctum')->group(function () {
     Route::post('/update/avatar', [UserController::class, "update_avatar"]);
     Route::post('/update/email', [UserController::class, "update_email"]);
     Route::post('/update/email/approve', [UserController::class, "update_email_approve"]);
+});
+
+Route::prefix("company")->middleware('auth:sanctum')->group(function () {
+    Route::post("/create_link", [CompanyController::class, "create_link"]);
 });
 

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('company_invites', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->timestamps();
-            $table->string("name");
-            $table->text("description");
-            $table->integer("step_coins")->default(0);
+            $table->text("hash")->unique();
+            $table->foreignUuid("company_id")->constrained("companies")->cascadeOnDelete();
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('company_invites');
     }
 };

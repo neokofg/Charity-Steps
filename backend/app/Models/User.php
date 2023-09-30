@@ -71,4 +71,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Team::class,'team_users');
     }
+
+    public function isCompanyUser($id): Bool
+    {
+        if($this->companies->where("id",'=',$id)->count() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

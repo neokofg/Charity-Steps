@@ -20,3 +20,10 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - .:/workspace
     restart: on-failure:5
+  invitations:
+    build:
+      context: ./invitations
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace/invitations
+    restart: on-failure:5

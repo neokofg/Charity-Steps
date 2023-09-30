@@ -36,7 +36,6 @@ Route::prefix("user")->middleware('auth:sanctum')->group(function () {
 Route::prefix("company")->middleware('auth:sanctum')->group(function () {
     Route::post("/create/link", [CompanyController::class, "create_link"]);
     Route::post("/create/news", [CompanyController::class, "create_news"]);
-    Route::post("/wallet/fill", [PaymentController::class, "wallet_fill"]);
 });
 
 Route::prefix("news")->group(function () {

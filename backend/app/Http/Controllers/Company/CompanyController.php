@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCompanyNewsRequest;
 use App\Http\Requests\CreateLinkRequest;
 use App\Services\CompanyService;
 use Illuminate\Http\JsonResponse;
@@ -23,6 +24,17 @@ class CompanyController extends Controller
         $response = $this->companyService->create_link($request->all(), $u);
         if($response) {
             return response()->json(["message" => "Ссылка получена!", "status" => true, "link" => $response], Response::HTTP_OK);
+        } else {
+            return response()->json(["message" => "Произошла ошибка!", "status" => false], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function create_news(CreateCompanyNewsRequest $request): JsonResponse
+    {
+        $u = Auth::user();
+        $response = $this->companyService->create_news($request->all(), $u);
+        if($response) {
+            return response()->json(["message" => "Новость успешно создана!", "status" => true], Response::HTTP_OK);
         } else {
             return response()->json(["message" => "Произошла ошибка!", "status" => false], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

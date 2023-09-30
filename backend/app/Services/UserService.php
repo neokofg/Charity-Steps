@@ -42,7 +42,7 @@ class UserService {
     public function get_user($u): mixed
     {
         try {
-            return $u->with($this->relations)->get();
+            return User::where("id","=",$u->id)->with($this->relations)->get();
         } catch (Throwable $e) {
             return false;
         }

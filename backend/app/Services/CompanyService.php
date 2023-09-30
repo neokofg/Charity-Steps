@@ -6,7 +6,6 @@ use App\Models\Company;
 use App\Models\CompanyInvites;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 use Throwable;
 
 class CompanyService {
@@ -22,7 +21,7 @@ class CompanyService {
             $c_i->hash = $h;
             $c_i->company_id = $c->id;
             $c_i->save();
-            return "https://inv.charity-steps.ru?hash=". $h;
+            return "https://inv.charity-steps.ru/company?hash=". $h;
         } catch (Throwable $e) {
             return false;
         }

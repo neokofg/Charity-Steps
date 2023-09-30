@@ -57,14 +57,13 @@ class UserService {
 
             DB::transaction(function () use($c, $e) {
                 //creating User model
-                $u = new User();
-                $u->email = $e;
-                $u->save();
-
+                $u = User::where("is_email_verified", "=", false)->firstOrCreate(["email" => $e]);
+                if(!$u){
+                    return false;
+                }
                 //creating Verify model
-                $u_v = new UsersVerify();
+                $u_v = UsersVerify::firstOrNew(['user_id' => $u->id]);
                 $u_v->code = $c;
-                $u_v->user_id = $u->id;
                 $u_v->save();
 
                 //sending mail

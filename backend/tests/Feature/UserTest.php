@@ -29,7 +29,9 @@ class UserTest extends TestCase
         $response->assertStatus(200);
         $response->assertJson([
             "user" => [
-                "name" => "testUser"
+                [
+                    "name" => "testUser"
+                ]
             ]
         ]);
     }

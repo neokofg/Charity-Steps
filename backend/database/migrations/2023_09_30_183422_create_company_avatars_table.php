@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('company_avatars', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->timestamps();
             $table->string("url");
@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string("url_256")->nullable();
             $table->string("url_512")->nullable();
             $table->string("url_1024")->nullable();
-            $table->foreignUuid("user_id")->constrained("users")->cascadeOnDelete();
-            $table->softDeletes();
+            $table->foreignUuid("company_id")->constrained("companies")->cascadeOnDelete();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_history');
+        Schema::dropIfExists('company_avatars');
     }
 };

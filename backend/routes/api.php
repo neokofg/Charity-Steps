@@ -5,7 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\Company\PaymentController;
+use App\Http\Controllers\HistoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +31,15 @@ Route::prefix("user")->middleware('auth:sanctum')->group(function () {
     Route::post('/update/avatar', [UserController::class, "update_avatar"]);
     Route::post('/update/email', [UserController::class, "update_email"]);
     Route::post('/update/email/approve', [UserController::class, "update_email_approve"]);
+    Route::post('/fill/charity', [UserController::class, "fill_charity"]);
+    Route::post('/upload/history', [UserController::class, "upload_history"]);
 });
 
 Route::prefix("company")->middleware('auth:sanctum')->group(function () {
+    Route::get('/get', [CompanyController::class, "get_company"]);
     Route::post("/create/link", [CompanyController::class, "create_link"]);
     Route::post("/create/news", [CompanyController::class, "create_news"]);
+    Route::post('/update/avatar', [CompanyController::class, "update_avatar"]);
 });
 
 Route::prefix("news")->group(function () {
@@ -43,3 +47,4 @@ Route::prefix("news")->group(function () {
     Route::get("/find", [NewsController::class, "find_news"]);
 });
 
+Route::get("/histories", [HistoriesController::class, "get_histories"]);

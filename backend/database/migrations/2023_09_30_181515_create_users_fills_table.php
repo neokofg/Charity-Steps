@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_fills', function (Blueprint $table) {
+        Schema::create('users_fills', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->timestamps();
-            $table->integer("amount");
-            $table->dateTime("expDate");
-            $table->enum("status",["declined","pending","completed"]);
-            $table->foreignUuid("company_id")->constrained("companies")->cascadeOnDelete();
+            $table->enum("status", ["completed", "pending"])->default("pending");
             $table->foreignUuid("user_id")->constrained("users")->cascadeOnDelete();
+            $table->foreignUuid("charity_id")->constrained("charities")->cascadeOnDelete();
+            $table->integer("amount");
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_fills');
+        Schema::dropIfExists('users_fills');
     }
 };

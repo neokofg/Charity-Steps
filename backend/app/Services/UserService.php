@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Avatar;
+use App\Models\History;
 use App\Models\User;
+use App\Models\UsersFills;
 use App\Models\UsersVerify;
 use App\Models\UsersVerifyUpdateEmail;
 use Illuminate\Support\Facades\Auth;
@@ -208,6 +210,47 @@ class UserService {
             return true;
         } catch (Throwable $e) {
             dd($e);
+        }
+    }
+
+    public function fill_charity($r, $u): Bool
+    {
+        try {
+            DB::transaction(function () use($r,$u){
+                $c = $u->stepcoins_value - $r['amount'];
+                if($c < 0) {
+                    return false;
+                }
+                $u->stepcoins_value = $c;
+                $u->save();
+
+                $f_c = new UsersFills();
+                $f_c->amount = $r['amount'];
+                $f_c->charity_id = $r['charity_id'];
+                $f_c->user_id = $u->id;
+                $f_c->save();
+            });
+            return true;
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
+
+    public function upload_history($r, $u): Bool
+    {
+        try {
+            $us = $this->storageService->upload_file($r);
+            $h = new History();
+            $h->url = $us['url'];
+            $h->url_128 = $us['url_128'] ?? null;
+            $h->url_256 = $us['url_256'] ?? null;
+            $h->url_512 = $us['url_512'] ?? null;
+            $h->url_1024 = $us['url_1024'] ?? null;
+            $h->user_id = $u->id;
+            $h->save();
+            return true;
+        } catch (Throwable $e) {
+            return false;
         }
     }
 }

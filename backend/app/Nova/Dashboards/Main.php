@@ -2,6 +2,7 @@
 
 namespace App\Nova\Dashboards;
 
+use App\Nova\Metrics\NewUsers;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
@@ -15,7 +16,12 @@ class Main extends Dashboard
     public function cards()
     {
         return [
-            new Help,
+            NewUsers::make()->width('1/2')->dynamicHeight(),
         ];
+    }
+
+    public function name(): string
+    {
+        return 'Панель управления';
     }
 }

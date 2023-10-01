@@ -80,4 +80,20 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function isCharityUser($id): Bool
+    {
+        if($this->charities->where("id",'=',$id)->count() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isAdmin(): Bool
+    {
+        if($this->admin()->exists()){
+            return true;
+        } else return false;
+    }
 }

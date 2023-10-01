@@ -19,23 +19,10 @@ Charity Steps - это корпоративное приложение, где �
 
 Текст размечен заголовками, абзацами и списками для улучшения структуры. Весь текст помещен в контейнер с цветным фоном, чтобы его было удобно скопировать целиком.
 
-# Stack
+## Установка
 
-## Backend
-
-- Laravel
-- Laravel Nova
-- S3 Selectel
-- REST API + GRAPHQL
-- PUSHER
-- SERVERLESS NEONDB
-
-## DevOps
-
-- Nginx
-- CloudFlare
-- Docker
-- VPS (Ubuntu 22)
-- reg.ru (domain)
-- Certbot (wildcard ssl)
-- Github Actions
+- cd backend && composer install
+- cd invitations && composer install
+- cd spa && npm install
+- docker compose build
+- docker compose up -d

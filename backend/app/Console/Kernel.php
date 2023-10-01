@@ -12,10 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('app:check-wallet-fills')
-            ->everyTenMinutes()
-            ->name('check-wallet-fills')
+        $schedule->command('app:history-auto-delete')
+            ->everySixHours()
+            ->name('history-auto-delete')
             ->withoutOverlapping()
             ->onOneServer();
     }

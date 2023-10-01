@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Company;
+use App\Models\CompanyAvatar;
 use App\Models\CompanyInvites;
 use App\Models\News;
 use App\Models\NewsImage;
@@ -14,7 +15,24 @@ use Throwable;
 class CompanyService {
     public function __construct(private StorageService $storageService)
     {
+        $this->relations = [
+            "avatar",
+            "news",
+            "charities",
+            "users"
+        ];
+    }
 
+    public function get_company($r, $u): mixed
+    {
+        if(!$u->isCompanyUser($r['company_id'])){
+            return false;
+        }
+        try {
+            return Company::where("company_id","=",$r['company_id'])->with($this->relations)->get();
+        } catch (Throwable $e) {
+            return false;
+        }
     }
     public function create_link($r, $u): mixed
     {
@@ -63,6 +81,29 @@ class CompanyService {
             });
             return true;
         } catch (Throwable $e) {
+            return false;
+        }
+    }
+
+    public function update_avatar($r, $u): Bool
+    {
+        if(!$u->isCompanyUser($r['company_id'])){
+            return false;
+        }
+        try {
+            $us = $this->storageService->upload_file($r['file']);
+            $c_a = CompanyAvatar::firstOrCreate([
+                "company_id" => $r['company_id'],
+            ]);
+            $c_a->url = $us['url'];
+            $c_a->url_128 = $us['url_128'] ?? null;
+            $c_a->url_256 = $us['url_256'] ?? null;
+            $c_a->url_512 = $us['url_512'] ?? null;
+            $c_a->url_1024 = $us['url_1024'] ?? null;
+            $c_a->save();
+
+            return true;
+        } catch(Throwable $e) {
             return false;
         }
     }

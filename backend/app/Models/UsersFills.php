@@ -27,6 +27,6 @@ class UsersFills extends Model
 
     public function charity(): BelongsTo
     {
-        return $this->belongsTo(Challenge::class, "charity_id", "id");
+        return $this->belongsTo(Charity::class, "charity_id", "id");
     }
 }

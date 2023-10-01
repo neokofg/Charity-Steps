@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CharitySeeder::class,
             CompanySeeder::class,
-            NewsSeeder::class
+            NewsSeeder::class,
+            UsersFillsSeeder::class
         ]);
     }
 }

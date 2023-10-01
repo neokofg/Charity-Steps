@@ -1,11 +1,28 @@
+---
+import Welcome from "../components/Welcome.astro";
+import Text from "../components/Text.astro";
+import Benefits from "../components/Benefits.astro";
+import ForCompanies from "../components/ForCompanies.astro";
+import Charities from "../components/Charities.astro";
+import Banner from "../components/Banner.astro";
+---
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Charity Steps</title>
     <meta name="description" content="Charity Steps SPA">
+    <link href="/src/styles/style.css" rel="stylesheet">
+    <link href="/src/assets/fonts/Inter/stylesheet.css" rel="stylesheet">
 </head>
-<body>
-    <p>Check</p>
+<body class="bg-[#f5f5f5] custom-font">
+    <div class="container mt-[32px]">
+        <Welcome></Welcome>
+        <Text></Text>
+        <Benefits></Benefits>
+        <ForCompanies></ForCompanies>
+        <Charities></Charities>
+        <Banner></Banner>
+    </div>
 </body>
 </html>

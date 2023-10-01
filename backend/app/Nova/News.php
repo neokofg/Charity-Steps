@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -47,8 +48,9 @@ class News extends Resource
     {
         return [
             ID::make()->sortable(),
+            Date::make("Создано", "created_at")->onlyOnIndex()->onlyOnDetail()->sortable(),
             Text::make("Заголовок", "title")->sortable(),
-            Text::make("Контент", "content")->onlyOnDetail(),
+            Text::make("Контент", "content")->showOnCreating()->showOnUpdating(),
         ];
     }
 

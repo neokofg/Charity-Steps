@@ -2,33 +2,29 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\CompleteUsersFills;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class User extends Resource
+class UsersFills extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\User>
+     * @var class-string<\App\Models\UsersFills>
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\UsersFills::class;
 
-    public static function authorizedToCreate(Request $request)
-    {
-        return false;
-    }
 
     public static function label()
     {
-        return "Пользователи";
+        return "Пожертвования";
     }
 
     /**
@@ -36,7 +32,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -44,7 +40,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id',
     ];
 
     /**
@@ -57,20 +53,15 @@ class User extends Resource
     {
         return [
             ID::make()->sortable(),
-            Boolean::make("Почта подтверждена", 'is_email_verified')
-                ->sortable(),
-            Text::make('Имя', 'name')
-                ->sortable(),
-            Text::make('Фамилия', 'surname')
-                ->sortable(),
-            Text::make('Почта', 'email')
-                ->sortable(),
-            Text::make('Пол', 'sex')
-                ->sortable(),
-            Text::make('StepCoins', 'stepcoins_value')
-                ->sortable(),
-            Text::make('Описание', 'description')->onlyOnDetail(),
-            HasMany::make('Пожертвования', 'user_fills', UsersFills::class)
+            Date::make("Создано", "created_at")->onlyOnIndex()->onlyOnDetail()->sortable(),
+            Select::make("Статус", "status")
+                ->options([
+                    "Завершен" => "completed",
+                    "Ожидает перевода" => "pending"
+                ])->sortable(),
+            Number::make("Сумма StepCoin-ов", "amount"),
+            BelongsTo::make("Пользователь", "user", User::class),
+            BelongsTo::make("Фонд", "charity", Charity::class),
         ];
     }
 
@@ -115,6 +106,8 @@ class User extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            new CompleteUsersFills
+        ];
     }
 }

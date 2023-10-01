@@ -8,6 +8,7 @@ use App\Nova\Company;
 use App\Nova\Dashboards\Main;
 use App\Nova\News;
 use App\Nova\User;
+use App\Nova\UsersFills;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Menu\MenuItem;
@@ -32,6 +33,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make('Пользователи', [
                     MenuItem::resource(User::class),
+                    MenuItem::resource(UsersFills::class)
                 ])->icon('user')->collapsable(),
 
                 MenuSection::make('Компании', [

@@ -96,4 +96,9 @@ class User extends Authenticatable
             return true;
         } else return false;
     }
+
+    public function user_fills(): HasMany
+    {
+        return $this->hasMany(UsersFills::class,"user_id","id");
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -27,7 +29,7 @@ class Company extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -48,9 +50,11 @@ class Company extends Resource
     {
         return [
             ID::make()->sortable(),
+            Date::make("Создано", "created_at")->onlyOnIndex()->onlyOnDetail()->sortable(),
             Text::make("Название", "name"),
             Text::make("Описание", "description"),
-            BelongsToMany::make("Пользователи", "users", User::class)
+            BelongsToMany::make("Пользователи", "users", User::class),
+            HasMany::make("Новости", "news", News::class)
         ];
     }
 

@@ -20,18 +20,10 @@ class CreateActionEventsTable extends Migration
             $table->char('batch_id', 36);
             $table->foreignIdFor(Util::userModel(), 'user_id')->index();
             $table->string('name');
-            $table->morphs('actionable');
-            $table->morphs('target');
+            $table->uuidMorphs('actionable');
+            $table->uuidMorphs('target');
             $table->string('model_type');
-
-            if (Builder::$defaultMorphKeyType === 'uuid') {
-                $table->uuid('model_id')->nullable();
-            } elseif (Builder::$defaultMorphKeyType === 'ulid') {
-                $table->ulid('model_id')->nullable();
-            } else {
-                $table->unsignedBigInteger('model_id')->nullable();
-            }
-
+            $table->uuid('model_id')->nullable();
             $table->text('fields');
             $table->string('status', 25)->default('running');
             $table->text('exception');

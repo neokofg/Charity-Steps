@@ -1,11 +1,12 @@
 ---
-import Welcome from "../components/Welcome.astro";
-import Text from "../components/Text.astro";
-import Benefits from "../components/Benefits.astro";
-import ForCompanies from "../components/ForCompanies.astro";
-import Charities from "../components/Charities.astro";
-import Banner from "../components/Banner.astro";
-import Footer from "../components/Footer.astro";
+import Welcome from "../components/Welcome.tsx";
+import Text from "../components/Text.tsx";
+import Benefits from "../components/Benefits.tsx";
+import ForCompanies from "../components/ForCompanies.tsx";
+import Charities from "../components/Charities.tsx";
+import Banner from "../components/Banner.tsx";
+import Footer from "../components/Footer.tsx";
+import AnimationLayout from "./AnimationLayout";
 ---
 <html lang="en">
 <head>
@@ -18,13 +19,7 @@ import Footer from "../components/Footer.astro";
 </head>
 <body class="bg-[#f5f5f5] custom-font">
     <div class="container mt-[32px]">
-        <Welcome></Welcome>
-        <Text></Text>
-        <Benefits></Benefits>
-        <ForCompanies></ForCompanies>
-        <Charities></Charities>
-        <Banner></Banner>
-        <Footer></Footer>
+        <AnimationLayout client:only />
     </div>
 </body>
 </html>

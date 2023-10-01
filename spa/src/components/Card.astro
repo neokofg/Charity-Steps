@@ -1,0 +1,8 @@
+---
+import { Image } from 'astro:assets';
+const { text,src } = Astro.props;
+---
+<div class="flex justify-between h-[164px] bg-white rounded-[24px] pt-6 pl-8">
+    <p class="font-medium text-[24px]">{text}</p>
+    <Image src={src} class="mt-5" width="150px" height="50%" alt=" "/>
+</div>

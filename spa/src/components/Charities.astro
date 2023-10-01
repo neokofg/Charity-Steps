@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import CharityImg from '../assets/charityimg.png'
+---
+<div>
+    <h2 class="font-bold text-[48px] mt-20">Благотворительные организации</h2>
+    <div class="flex justify-between bg-white rounded-[24px] pl-16 pt-14 mt-10">
+        <div>
+            <div class="bg-[#eff6ff] rounded-[24px] w-2/6 py-2">
+                <p class="font-medium text-[24px] text-[#2563eb] text-center">Развивайте свое движение</p>
+            </div>
+            <p class="font-medium text-[32px] text-black mt-7 w-4/5">Мы помогаем благотворительным организациям активировать, привлекать и удерживать своих лучших сторонников среди широких масс и корпораций.</p>
+        </div>
+        <Image src={CharityImg} alt=" "/>
+    </div>
+</div>

@@ -3,14 +3,14 @@ import { Image } from 'astro:assets';
 import Banner from '../assets/image-banner.png';
 import Logo from '../assets/logo.png';
 ---
-<div class="grid grid-cols-2 gap-2">
-    <div class="col-span-1 bg-white rounded-[32px] pt-14 px-10">
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-2">
+    <div class="col-span-1 bg-white rounded-[32px] pt-14 pb-5 px-10">
         <div>
-            <Image src={Logo} alt="CS" class="w-[64px] h-[64px]"/>
-            <h2 class="font-semibold text-[36px] text-[#2563eb] mt-1">Charity Steps</h2>
+            <Image src={Logo} alt="CS" class="mx-auto xl:mx-0 w-[64px] h-[64px]"/>
+            <h2 class="font-semibold text-center xl:text-left text-[36px] text-[#2563eb] mt-1">Charity Steps</h2>
             <h1 class="font-bold text-[48px] text-black mt-1">КАЖДЫЙ ШАГ ИМЕЕТ ЗНАЧЕНИЕ</h1>
             <p class="font-medium text-[24px] text-black mt-3">Мы помогаем людям, благотворительным организациям и компаниям оказывать влияние на каждом этапе.</p>
-            <button class="w-full bg-[#2563eb] text-white h-[77px] border rounded-[24px] mt-5">Скачать приложение</button>
+            <button class="w-full bg-[#2563eb] text-[22px] text-white h-[77px] rounded-[24px] mt-5">Скачать приложение</button>
         </div>
     </div>
     <div class="col-span-1 bg-[#2563eb] rounded-[32px]">

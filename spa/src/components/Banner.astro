@@ -2,10 +2,10 @@
 import { Image } from 'astro:assets';
 import Iphone from '../assets/iphone.png'
 ---
-<div class="flex justify-between bg-[#2563eb] rounded-[24px] mt-20 pt-10 px-10">
-    <div class="text-white">
-        <h2 class="font-bold text-[44px] w-[70%]">Загрузите приложение — бесплатно! О, и это бесплатно!</h2>
-        <button>Скачать приложение</button>
+<div class="flex justify-between bg-[#2563eb] rounded-[24px] mt-5 xl:mt-20 pt-10 px-10">
+    <div class="text-white pb-5 xl:pb-0">
+        <h2 class="font-bold text-[20px] xl:text-[44px] w-[70%]">Загрузите приложение — бесплатно! О, и это бесплатно!</h2>
+        <button class="w-full xl:w-[55%] mt-7 py-5 bg-white rounded-[24px] text-[#2563eb] font-medium text-[24px]">Скачать приложение</button>
     </div>
-    <Image src={Iphone} alt=" "/>
+    <Image class="hidden xl:inline" src={Iphone} alt=" "/>
 </div>
